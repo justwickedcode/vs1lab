@@ -37,16 +37,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
 }
 
 a {
   color: var(--link-color);
+  font-weight: bold;
 }
 
 /* ### TODO ### Styles for other HTML elements */
 
-/* ... your code here ... */
 
 
 /* Grid styles (no changes required) */
@@ -56,82 +58,214 @@ a {
   display: flex;
   justify-content: space-between;
   flex: 1;
+  gap: 1rem;
 }
 
-.col-1 {
-  width: calc(8.33% - 1rem);
-}
-
-.col-2 {
-  width: calc(16.66% - 1rem);
-}
-
-.col-3 {
-  width: calc(25% - 1rem);
-}
-
-.col-4 {
-  width: calc(33.33% - 1rem);
-}
-
-.col-5 {
-  width: calc(41.66% - 1rem);
-}
-
-.col-6 {
-  width: calc(50% - 1rem);
-}
-
-.col-7 {
-  width: calc(58.33% - 1rem);
-}
-
-.col-8 {
-  width: calc(66.66% - 1rem);
-}
-
-.col-9 {
-  width: calc(75% - 1rem);
-}
-
-.col-10 {
-  width: calc(83.33% - 1rem);
-}
-
-.col-11 {
-  width: calc(91.66% - 1rem);
-}
-
-.col-12 {
-  width: calc(100% - 1rem);
-}
+.col-1 { width: calc(8.33% - 1rem); }
+.col-2 { width: calc(16.66% - 1rem); }
+.col-3 { width: calc(25% - 1rem); }
+.col-4 { width: calc(33.33% - 1rem); }
+.col-5 { width: calc(41.66% - 1rem); }
+.col-6 { width: calc(50% - 1rem); }
+.col-7 { width: calc(58.33% - 1rem); }
+.col-8 { width: calc(66.66% - 1rem); }
+.col-9 { width: calc(75% - 1rem); }
+.col-10 { width: calc(83.33% - 1rem); }
+.col-11 { width: calc(91.66% - 1rem); }
+.col-12 { width: calc(100% - 1rem); }
 
 
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.header img {
+  width: 2.5rem;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+main {
+  padding: 2rem;
+  width: 100%;
+  max-width: 1230px;
+}
 
 
 /* ### TODO ### Styles for Tagging component */
 
-/* ... your code here ... */
+.tagging {
+  user-select: none;
+}
+
+.tagging h2 {
+  margin-bottom: 1.25rem;
+}
+
+.tagging form {
+  width: 100%;
+}
+
+.tagging fieldset {
+  border: var(--border-color) solid 1px;
+  padding: 1.5rem 1rem 1rem 1rem;
+  position: relative;
+}
+
+.tagging legend {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 0.25rem;
+}
+
+.tagging label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--gray-color);
+  font-weight: 600;
+}
+
+.tagging input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: #999999 solid 1px;
+}
+
+.tagging input:focus {
+  outline: none;
+  border: #767676 solid 1px;
+}
+
+.tagging input[type=submit] {
+  color: #111111;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tagging input[type=submit]:hover {
+  border: #767676 solid 1px;
+}
 
 
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.discovery {
+  width: 100%;
+  user-select: none;
+}
+
+.discovery h2 {
+  margin-bottom: 1.25rem;
+}
+
+.discovery form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.discovery fieldset {
+  border: var(--border-color) solid 1px;
+  padding: 1.5rem 1rem 1rem 1rem;
+  position: relative;
+}
+
+.discovery legend {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0 0.25rem;
+}
+
+.discovery label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--gray-color);
+  font-weight: 600;
+}
+
+.discovery input {
+  max-width: 20rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: #999999 solid 1px;
+}
+
+.discovery input:focus {
+  outline: none;
+  border: #767676 solid 1px;
+}
+
+.discovery input[type=submit] {
+  color: #111111;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.discovery input[type=submit]:hover {
+  border: #767676 solid 1px;
+}
+
+.discovery__results {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.discovery__results li {
+  color: var(--link-color);
+  font-weight: bold;
+  background-color: var(--background-color);
+  border: var(--border-color) solid 1px;
+  padding: 1rem;
+}
+
+.discovery__map {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.discovery__map img {
+  width: 100%;
+}
+
+.discovery__map span {
+  color: #767676;
+  font-weight: 600;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+footer {
+  width: 100%;
+  padding: 2.5rem 2rem;
+  font-weight: bold;
+  background-color: var(--background-color);
+}
 
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
+@media (max-width: 850px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .col-1, .col-2, .col-3, .col-4, .col-5,
+  .col-6, .col-7, .col-8, .col-9, .col-10,
+  .col-11, .col-12 {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
