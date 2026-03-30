@@ -103,7 +103,7 @@ main {
 }
 
 main > .row {
-  gap: 2rem;
+  gap: 1.25rem;
   flex: none;
 }
 
@@ -178,7 +178,7 @@ main > .row {
 .discovery form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .discovery fieldset {
