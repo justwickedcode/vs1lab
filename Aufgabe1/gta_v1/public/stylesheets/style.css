@@ -1,8 +1,8 @@
 /*
-  File origin: VS1LAB A1b  
+  File origin: VS1LAB A1b
 
   CSS style is BEM. Classes used for CSS, IDs for JavaScript querying (future use).
-  CSS variables used for clarity and themability (e.g. through SSR). 
+  CSS variables used for clarity and themability (e.g. through SSR).
   Inherited box sizing used for ease of including 3rd party content-box components.
 */
 
@@ -58,7 +58,6 @@ a {
   display: flex;
   justify-content: space-between;
   flex: 1;
-  gap: 1rem;
 }
 
 .col-1 { width: calc(8.33% - 1rem); }
@@ -82,8 +81,12 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem 2rem;
   background-color: var(--background-color);
+}
+
+.header h1 {
+  margin: 0 1rem;
 }
 
 .header img {
@@ -96,7 +99,12 @@ a {
 main {
   padding: 2rem;
   width: 100%;
-  max-width: 1230px;
+  max-width: 1200px;
+}
+
+main > .row {
+  gap: 2rem;
+  flex: none;
 }
 
 
@@ -137,22 +145,22 @@ main {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: #999999 solid 1px;
+  border: var(--border-color) solid 1px;
 }
 
 .tagging input:focus {
   outline: none;
-  border: #767676 solid 1px;
+  border: var(--gray-color) solid 1px;
 }
 
 .tagging input[type=submit] {
-  color: #111111;
+  color: var(--gray-color);
   font-weight: 600;
   cursor: pointer;
 }
 
 .tagging input[type=submit]:hover {
-  border: #767676 solid 1px;
+  border: var(--gray-color) solid 1px;
 }
 
 
@@ -193,25 +201,34 @@ main {
 }
 
 .discovery input {
+  width: 100%;
   max-width: 20rem;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: #999999 solid 1px;
+  border: var(--border-color) solid 1px;
 }
 
 .discovery input:focus {
   outline: none;
-  border: #767676 solid 1px;
+  border: var(--gray-color) solid 1px;
 }
 
 .discovery input[type=submit] {
-  color: #111111;
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  color: var(--gray-color);
   font-weight: 600;
   cursor: pointer;
 }
 
 .discovery input[type=submit]:hover {
-  border: #767676 solid 1px;
+  border: var(--gray-color) solid 1px;
+}
+
+.discovery__wrapper {
+  gap: 1rem;
+  flex: none;
 }
 
 .discovery__results {
@@ -240,7 +257,7 @@ main {
 }
 
 .discovery__map span {
-  color: #767676;
+  color: var(--gray-color);
   font-weight: 600;
 }
 
@@ -249,7 +266,7 @@ main {
 
 footer {
   width: 100%;
-  padding: 2.5rem 2rem;
+  padding: 1rem 2rem;
   font-weight: bold;
   background-color: var(--background-color);
 }
