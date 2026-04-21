@@ -139,9 +139,77 @@ class MapManager {
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-// ... your code here ...
+
+
+// read GeoTag data from the map element's data-tags
+function readTagsFromDom() {
+    const mapDiv = document.getElementById("map");
+    if (!mapDiv || !mapDiv.dataset.tags) return [];
+
+    try {
+        return JSON.parse(mapDiv.dataset.tags);
+    } catch (e) {
+        console.error("Could not parse data-tags JSON:", e);
+        return [];
+    }
+}
+
+// fill all latitude/longitude form fields
+function populateLocationFields(latitude, longitude) {
+    const fields = [
+        { id: "latitude", value: latitude },
+        { id: "longitude", value: longitude },
+        { id: "discovery-latitude", value: latitude },
+        { id: "discovery-longitude", value: longitude },
+    ];
+
+    for (const field of fields) {
+        const el = document.getElementById(field.id);
+        if (el) el.value = field.value;
+    }
+}
+
+// remove the static map placeholder (image + label)
+function removeMapPlaceholder() {
+    const mapContainer = document.getElementById("map");
+    if (!mapContainer) return;
+
+    const img = mapContainer.querySelector("img");
+    const span = mapContainer.querySelector("span");
+    if (img) img.remove();
+    if (span) span.remove();
+}
+
+// retrieve the current location and initialize the map
+function updateLocation() {
+    const mapManager = new MapManager();
+    const tags = readTagsFromDom();
+
+    const tagLat = document.getElementById("latitude");
+    const tagLon = document.getElementById("longitude");
+
+    // if coordinates are already set (e.g. from server), use them directly
+    if (tagLat?.value && tagLon?.value) {
+        mapManager.initMap(tagLat.value, tagLon.value);
+        mapManager.updateMarkers(tagLat.value, tagLon.value, tags);
+        return;
+    }
+
+    // otherwise, request location from the browser
+    try {
+        LocationHelper.findLocation((helper) => {
+            populateLocationFields(helper.latitude, helper.longitude);
+            mapManager.initMap(helper.latitude, helper.longitude);
+            mapManager.updateMarkers(helper.latitude, helper.longitude, tags);
+            removeMapPlaceholder();
+        });
+    } catch (err) {
+        console.error("Geolocation API not available:", err);
+    }
+}
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation()
+    console.info("Geolocation updated successfully");
 });
