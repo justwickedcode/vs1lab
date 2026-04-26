@@ -38,7 +38,7 @@ class InMemoryGeoTagStore {
     this.#geotags = this.#geotags.filter(gt => gt.name !== name);
   }
 
-  // proximity ca 0.5 damit es ungefähr in der selben straße liegt
+  // proximity ca 0.5 to be in the same street
   getNearbyGeoTags(location) {
     const lat = location.latitude;
     const lon = location.longitude;

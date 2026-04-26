@@ -42,33 +42,33 @@ function readTagsFromMapDataAttribute() {
  * It is called once the page has been fully loaded.
  */
 function updateLocation() {
-  // 1) Formularfelder auslesen
+  // 1) read form fields
   const tagLat = document.getElementById("latitude");
   const tagLon = document.getElementById("longitude");
 
-  // Discovery-Formular (hidden inputs)
+  // discovery forms (hidden inputs)
   const discLat = document.getElementById("disc-latitude");
   const discLon = document.getElementById("disc-longitude");
 
-  // Prüfen, ob Koordinaten schon vorhanden sind (Tagging ODER Discovery)
+  //are coords already available? (Tagging ODER Discovery)
   const latValue = (tagLat?.value || discLat?.value || "").trim();
   const lonValue = (tagLon?.value || discLon?.value || "").trim();
   const latAlreadySet = latValue !== "";
   const lonAlreadySet = lonValue !== "";
 
-  // 2) FALL A: Koordinaten sind schon da -> KEIN GeoLocation-Aufruf
+  // yes they are -> no GeoLocation call
   if (latAlreadySet && lonAlreadySet) {
     const latitude = latValue;
     const longitude = lonValue;
 
-    // Karte direkt initialisieren
+    // init map directly
     mapManager.initMap(latitude, longitude);
 
-    // Aufgabe 3.2.3: Marker für Discovery-Ergebnisse setzen
+    // set marker for discovery results
     const tags = readTagsFromMapDataAttribute();
     mapManager.updateMarkers(Number(latitude), Number(longitude), tags);
 
-    // Platzhalter entfernen
+    // remove placehoder
     const mapContainer = document.getElementById("map");
     if (mapContainer) {
       const img = mapContainer.querySelector("img");
@@ -77,29 +77,29 @@ function updateLocation() {
       if (span) span.remove();
     }
 
-    return; // wichtig: Funktion hier beenden
+    return;
   }
 
-  // 3) FALL B: Koordinaten fehlen -> GeoLocation API verwenden
+  // no coords -> use GeoLocation API
   try {
     LocationHelper.findLocation((helper) => {
       const latitude = helper.latitude;
       const longitude = helper.longitude;
 
-      // Formulare füllen
+      // fill fields
       if (tagLat) tagLat.value = latitude;
       if (tagLon) tagLon.value = longitude;
       if (discLat) discLat.value = latitude;
       if (discLon) discLon.value = longitude;
 
-      // Karte initialisieren
+      // map init
       mapManager.initMap(latitude, longitude);
 
-      // Aufgabe 3.2.3: Marker für Discovery-Ergebnisse setzen
+      // set marker for discovery
       const tags = readTagsFromMapDataAttribute();
       mapManager.updateMarkers(Number(latitude), Number(longitude), tags);
 
-      // Platzhalter entfernen
+      // use palceholder
       const mapContainer = document.getElementById("map");
       if (mapContainer) {
         const img = mapContainer.querySelector("img");

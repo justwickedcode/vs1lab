@@ -101,7 +101,7 @@ router.post('/tagging', (req, res) => {
  * by radius and keyword.
  */
 
-// TODO: ... your code here ...
+// TODO
 router.post('/discovery', (req, res) => {
   const store = req.app.locals.geoTagStore;
 
