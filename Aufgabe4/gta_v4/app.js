@@ -48,15 +48,15 @@ app.use(express.urlencoded({ extended: false }));
  */
 //TODO--------------------------------------------------------------------------------------------------------
 
-// GeoTagStore initialisieren
+// GeoTagStore init
 const geoTagStore = new InMemoryGeoTagStore();
 
-// Beispieldaten laden
+// load example
 GeoTagExamples.tagList.forEach(([name, lat, lon, hashtag]) => {
   geoTagStore.addGeoTag(new GeoTag(name, lat, lon, hashtag));
 });
 
-// Store für alle Routen verfügbar machen
+// make store available for all routes
 app.locals.geoTagStore = geoTagStore;
 
 //TODO:------------------------------------------------------------------------------------------------------

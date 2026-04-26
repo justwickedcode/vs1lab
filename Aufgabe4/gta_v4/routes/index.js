@@ -110,13 +110,13 @@ router.get('/api/geotags', (req, res) => {
 
   let taglist;
 
-  if (radius !== undefined && latitude !== undefined && longitude !== undefined) {
+  if (latitude !== undefined && longitude !== undefined) {
     const location = { latitude: Number(latitude), longitude: Number(longitude) };
-    const r = Number(radius);
+    const r = radius !== undefined ? Number(radius) : undefined;
     if (searchterm && searchterm !== '') {
-      taglist = store.searchNearbyGeoTags(location, searchterm, r);
+      taglist = r !== undefined ? store.searchNearbyGeoTags(location, searchterm, r) : store.searchNearbyGeoTags(location, searchterm);
     } else {
-      taglist = store.getNearbyGeoTags(location, r);
+      taglist = r !== undefined ? store.getNearbyGeoTags(location, r) : store.getNearbyGeoTags(location);
     }
   } else if (searchterm && searchterm !== '') {
     taglist = store.getAllGeoTags().filter(gt =>

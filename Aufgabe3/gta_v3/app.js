@@ -56,7 +56,7 @@ GeoTagExamples.tagList.forEach(([name, lat, lon, hashtag]) => {
   geoTagStore.addGeoTag(new GeoTag(name, lat, lon, hashtag));
 });
 
-// Store für alle Routen verfügbar machen
+// Make store available for all routes
 app.locals.geoTagStore = geoTagStore;
 
 //TODO

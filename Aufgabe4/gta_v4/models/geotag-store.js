@@ -12,7 +12,7 @@ class InMemoryGeoTagStore {
    */
   constructor() {
     this.geotags = [];
-    this.nextId = 1; //Zähler zur vergabe des primärschlüssels
+    this.nextId = 1; // counter for assigning the primary key
   }
 
   /**
@@ -22,7 +22,7 @@ class InMemoryGeoTagStore {
    * @returns {GeoTag} the added GeoTag
    */
   addGeoTag(geotag) {
-    geotag.id = this.nextId++; //jeder geotagg kriegt bei Anlegen eine unique ID
+    geotag.id = this.nextId++; // each geotag gets an unique ID upon creation
     this.geotags.push(geotag);
     return geotag;
   }
@@ -52,7 +52,7 @@ class InMemoryGeoTagStore {
    * @returns {GeoTag|undefined}
    */
   getGeoTagById(id) {
-    // Zugriff auf Einzelressource über Primärschlüssel
+    // Access single resource by primary key
     return this.geotags.find(gt => gt.id === Number(id));
   }
 
@@ -64,7 +64,7 @@ class InMemoryGeoTagStore {
    * @returns {GeoTag|null}
    */
   updateGeoTagById(id, geotag) {
-    // Update-Logik für PUT 
+    // update business logic for PUT
     const index = this.geotags.findIndex(gt => gt.id === Number(id));
     if (index === -1) {
       return null;
@@ -82,13 +82,13 @@ class InMemoryGeoTagStore {
    * @returns {GeoTag|null}
    */
   deleteGeoTagById(id) {
-     // Delete-Logik für DELETE
+     // uptade business logic for delete DELETE
     const index = this.geotags.findIndex(gt => gt.id === Number(id));
     if (index === -1) {
       return null;
     }
 
-    return this.geotags.splice(index, 1)[0]; //index ab welcher stelle, 1 wie viele elemente entfernen
+    return this.geotags.splice(index, 1)[0];
   }
 
   /**

@@ -42,7 +42,7 @@ function updateDiscoveryWidget(tags) {
     document.getElementById("disc-longitude")?.value ||
     document.getElementById("longitude")?.value;
 
-  // Marker werden clientseitig aktualisiert (kein Server-Render mehr)
+  // update markers on the client
   if (lat && lon) {
     mapManager.updateMarkers(Number(lat), Number(lon), tags || []);
   }
@@ -69,12 +69,13 @@ function updateLocation() {
     return;
   }
 
-  LocationHelper.findLocation((helper) => {
+  LocationHelper.findLocation(async (helper) => {
     if (tagLat) tagLat.value = helper.latitude;
     if (tagLon) tagLon.value = helper.longitude;
     if (discLat) discLat.value = helper.latitude;
     if (discLon) discLon.value = helper.longitude;
     mapManager.initMap(helper.latitude, helper.longitude);
+    updateDiscoveryWidget(await searchGeoTags());
   });
 }
 
@@ -83,16 +84,16 @@ function updateLocation() {
  * Register event listeners and prevent default form submission.
  */
 
-// Zentrale Umstellung von Formular-Submit zu EventListener + AJAX
+// Form submit event listener + AJAX
 function registerHandlers() {
   const tagForm = document.getElementById("tag-form");
   const discoveryForm = document.getElementById("discoveryFilterForm");
 
   tagForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); //verhindert refresh
-    if (!tagForm.checkValidity()) return tagForm.reportValidity(); //ob der neue tag regelkonform ist
+    e.preventDefault();
+    if (!tagForm.checkValidity()) return tagForm.reportValidity(); // is the new tag valid?
 
-    // GeoTag wird  erzeugt
+    // create GeoTag
     const tag = new GeoTag(
       document.getElementById("name").value,
       document.getElementById("latitude").value,
@@ -100,21 +101,20 @@ function registerHandlers() {
       document.getElementById("hashtag").value
     );
 
-     // AJAX POST mit JSON statt Form-Submit
     const resp = await fetch("/api/geotags", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(tag),
     });
-    if (!resp.ok) return; //checkt obs geklappt hat, sonst return
+    if (!resp.ok) return;
 
     updateDiscoveryWidget(await searchGeoTags());
   });
 
 
-  // Discovery-Formular = AJAX GET statt POST + Render
+  // Discovery form = AJAX GET instead of POST + render
   discoveryForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); //refresh verhindern
+    e.preventDefault(); // prevent page refresh
     if (!discoveryForm.checkValidity()) return discoveryForm.reportValidity();
     updateDiscoveryWidget(await searchGeoTags());
   });
