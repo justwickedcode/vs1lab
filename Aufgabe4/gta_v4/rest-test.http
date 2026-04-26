@@ -37,7 +37,7 @@ GET http://localhost:3000/api/geotags?latitude=49.0138&longitude=8.3901
 ### Location filter far away (GET /api/geotags?lat&lon) -> expect empty array []
 GET http://localhost:3000/api/geotags?latitude=0&longitude=0
 
-### Delete GeoTag (DELETE /api/geotags/:id) -> expect deleted JSON (or 200/204 depending on impl)
+### Delete GeoTag (DELETE /api/geotags/:id) -> expect deleted JSON
 DELETE http://localhost:3000/api/geotags/{{id}}
 
 ### Verify deletion (GET /api/geotags/:id) -> expect 404
