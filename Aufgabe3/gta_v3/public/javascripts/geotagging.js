@@ -50,7 +50,7 @@ function updateLocation() {
   const discLat = document.getElementById("disc-latitude");
   const discLon = document.getElementById("disc-longitude");
 
-  //are coords already available? (Tagging ODER Discovery)
+  // are coords already available? (Tagging or Discovery)
   const latValue = (tagLat?.value || discLat?.value || "").trim();
   const lonValue = (tagLon?.value || discLon?.value || "").trim();
   const latAlreadySet = latValue !== "";
